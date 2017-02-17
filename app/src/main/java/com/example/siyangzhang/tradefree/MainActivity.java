@@ -16,7 +16,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.siyangzhang.tradefree.R;
 import com.example.siyangzhang.tradefree.fragment.IndexFragment;
 import com.example.siyangzhang.tradefree.fragment.CategFragment;
 import com.example.siyangzhang.tradefree.fragment.NearbyFragment;
@@ -117,9 +116,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void setTab(int i) {
-        // 默认图片
         resetImgs();
-        // 设置图片为亮色,切换内容区域
         switch (i) {
             case 0:
                 title_text.setVisibility(View.VISIBLE);
@@ -173,9 +170,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Boolean ActionSheetFlag = false;
     private static long firstTime;
 
-    /**
-     * 连续按两次返回键就退出
-     */
+
     @Override
     public void onBackPressed() {
         // TODO Auto-generated method stub
@@ -185,7 +180,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if (firstTime + 2000 > System.currentTimeMillis()) {
                 super.onBackPressed();
             } else {
-                //ShowToast("再按一次退出程序");
             }
             firstTime = System.currentTimeMillis();
         }
