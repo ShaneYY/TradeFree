@@ -1,4 +1,6 @@
 # TradeFree
-CSE5236 Mobile App Development /n
-The Ohio State University /n
+CSE5236 Mobile App Development
+
+The Ohio State University
+
 Group Members: Gu Xiang, Hu Zijian, Siyang Zhang
