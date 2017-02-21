@@ -21,6 +21,7 @@ import com.example.siyangzhang.tradefree.fragment.CategFragment;
 import com.example.siyangzhang.tradefree.fragment.NearbyFragment;
 import com.example.siyangzhang.tradefree.fragment.ProfileFragment;
 
+import java.io.FileOutputStream;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
