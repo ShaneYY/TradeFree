@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.example.siyangzhang.tradefree.ItemActivity;
 import com.example.siyangzhang.tradefree.R;
 
 /**
@@ -59,19 +58,10 @@ public class ProfileFragment extends BaseFragment {
         return fragment;
     }
 
-    private View.OnClickListener mBtnClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Intent intent = new Intent(getActivity(), ItemActivity.class);
-            startAnimActivity(intent);
-        }
-    };
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //mBtn = (Button) mView.findViewById(R.id.commit_edit);
-        //mBtn.setOnClickListener(mBtnClickListener);
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);

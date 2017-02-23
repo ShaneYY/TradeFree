@@ -1,9 +1,11 @@
-package com.example.siyangzhang.tradefree;
+package com.example.siyangzhang.tradefree.Bean;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Photo {
+import java.io.Serializable;
+
+public class Photo implements Serializable {
 	private static final String JSON_FILENAME = "filename";
 	
 	private String mFilename;

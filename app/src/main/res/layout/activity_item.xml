@@ -22,20 +22,6 @@
         android:paddingRight="4dip" />
 
     <EditText
-        android:id="@+id/details"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:background="@drawable/selector_edittext"
-        android:ems="10"
-        android:gravity="left|top"
-        android:hint="Input item description"
-        android:inputType="textMultiLine"
-        android:minLines="3"
-        android:paddingLeft="4dip"
-        android:paddingRight="4dip" />
-
-    <EditText
         android:id="@+id/price"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -50,14 +36,28 @@
         android:paddingRight="4dip" />
 
     <EditText
-        android:id="@+id/transaction"
+        android:id="@+id/detail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:background="@drawable/selector_edittext"
         android:ems="10"
         android:gravity="left|top"
-        android:hint="input deal location"
+        android:hint="Input item description"
+        android:inputType="textMultiLine"
+        android:minLines="3"
+        android:paddingLeft="4dip"
+        android:paddingRight="4dip" />
+
+    <EditText
+        android:id="@+id/type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:background="@drawable/selector_edittext"
+        android:ems="10"
+        android:gravity="left|top"
+        android:hint="Input item type"
         android:inputType="text"
         android:minLines="1"
         android:paddingLeft="4dip"
@@ -99,7 +99,7 @@
     </RelativeLayout>
 
     <Button
-        android:id="@+id/commit_edit"
+        android:id="@+id/publish"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"

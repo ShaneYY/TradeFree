@@ -1,12 +1,9 @@
-package com.example.siyangzhang.tradefree;
+package com.example.siyangzhang.tradefree.Bean;
 
+import java.io.Serializable;
 import java.util.UUID;
 
-/**
- * Created by siyangzhang on 2/17/17.
- */
-
-public class Item {
+public class Item implements Serializable {
 
     private UUID itemId;
     private User user;
@@ -15,8 +12,17 @@ public class Item {
     private String price;
     private String detail;
     private String type;
-
+    private String time;
     private boolean sold;
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
 
     public boolean isSold() {return sold;}
 

@@ -1,17 +1,19 @@
-package com.example.siyangzhang.tradefree;
+package com.example.siyangzhang.tradefree.Bean;
 
+import java.io.Serializable;
 import java.util.UUID;
 import com.google.android.maps.GeoPoint;
-/**
- * Created by siyangzhang on 2/17/17.
- */
 
-public class User {
+public class User implements Serializable {
     private UUID userId;
     private String name;
     private Boolean sex;
     private String number;
-    private GeoPoint location;
+
+    /**
+     *  Need to figure out how to use GeoPoint later
+     */
+    //private GeoPoint location;
 
     public UUID getUserId() {
         return userId;
@@ -45,12 +47,11 @@ public class User {
         this.number = number;
     }
 
-    public GeoPoint getLocation() {
-        return location;
-    }
+    //public GeoPoint getLocation() {
+    //    return location;
+    //}
 
-    public void setLocation(GeoPoint location) {
-        this.location = location;
-    }
-
+    //public void setLocation(GeoPoint location) {
+    //    this.location = location;
+    //}
 }
