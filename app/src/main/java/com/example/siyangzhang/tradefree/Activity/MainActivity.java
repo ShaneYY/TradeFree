@@ -1,26 +1,25 @@
-package com.example.siyangzhang.tradefree;
+package com.example.siyangzhang.tradefree.Activity;
 
 
-import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.view.KeyEvent;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.siyangzhang.tradefree.R;
+import com.example.siyangzhang.tradefree.ACache;
 import com.example.siyangzhang.tradefree.fragment.IndexFragment;
 import com.example.siyangzhang.tradefree.fragment.CategFragment;
 import com.example.siyangzhang.tradefree.fragment.NearbyFragment;
 import com.example.siyangzhang.tradefree.fragment.ProfileFragment;
-
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
@@ -35,13 +34,38 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private TextView title_text;
 
+    public static ACache mCache;
+
+    public static final String TAG = "Main";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d(TAG, "Activity onCreate");
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mCache= ACache.get(this);
+
         initView();
         initEvent();
         setSelect(0);
+    }
+
+    @Override
+    protected void onResume() {
+        Log.d(TAG, "Activity onResume");
+        super.onResume();
+    }
+
+    @Override
+    protected void onStop() {
+        Log.d(TAG, "Activity onStop");
+        super.onStop();
+    }
+
+    @Override
+    protected void onPause() {
+        Log.d(TAG, "Activity onPause");
+        super.onPause();
     }
 
     private void initView() {

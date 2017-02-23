@@ -51,6 +51,30 @@
             android:textColor="@color/colorTextWhite" />
     </LinearLayout>
 
+    <!-- TO DO: Publish button in bottom layout
+    <LinearLayout
+        android:id="@+id/id_publish"
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:scaleType="fitCenter">
+
+        <ImageView
+            android:id="@+id/id_publishimg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/publish" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/category"
+            android:textColor="@color/colorTextWhite" />
+    </LinearLayout>
+    -->
+
     <LinearLayout
         android:id="@+id/id_find"
         android:layout_width="0dp"

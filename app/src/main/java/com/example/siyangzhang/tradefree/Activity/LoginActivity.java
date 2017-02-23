@@ -1,4 +1,4 @@
-package com.example.siyangzhang.tradefree;
+package com.example.siyangzhang.tradefree.Activity;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -29,6 +29,8 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.example.siyangzhang.tradefree.R;
 
 import java.util.ArrayList;
 import java.util.List;

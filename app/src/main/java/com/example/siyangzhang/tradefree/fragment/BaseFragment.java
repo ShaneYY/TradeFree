@@ -17,7 +17,7 @@ import android.view.animation.ScaleAnimation;
 import android.widget.Toast;
 
 /**
- * Fragmenet 基类
+ * Fragmenet
  */
 public abstract class BaseFragment extends Fragment {
 
@@ -26,8 +26,6 @@ public abstract class BaseFragment extends Fragment {
 	public LayoutInflater mInflater;
 
 	private Handler handler = new Handler();
-
-	//protected BmobUserManager userManager;
 
 	public void runOnWorkThread(Runnable action) {
 		new Thread(action).start();
@@ -70,12 +68,6 @@ public abstract class BaseFragment extends Fragment {
 		mToast.show();
 	}
 
-	/*
-	public boolean isNetConnected() {
-		boolean isNetConnected = CommonUtils.isNetworkAvailable(getActivity());
-		return isNetConnected;
-	}
-	*/
 
 	public void startAnimActivity(Class<?> cla) {
 		this.startActivity(new Intent(getActivity(), cla));
@@ -85,7 +77,7 @@ public abstract class BaseFragment extends Fragment {
 		this.startActivity(intent);
 	}
 
-	// 按钮模拟心脏跳动
+	// Button simulating heartbeat animation
 	public void playHeartbeatAnimation(final View imageView) {
 		AnimationSet animationSet = new AnimationSet(true);
 		animationSet.addAnimation(new ScaleAnimation(1.0f, 0.5f, 1.0f, 0.5f,
@@ -119,22 +111,16 @@ public abstract class BaseFragment extends Fragment {
 				animationSet.setInterpolator(new DecelerateInterpolator());
 				animationSet.setFillAfter(false);
 
-				// 实现心跳的View
 				imageView.startAnimation(animationSet);
 			}
 		});
-
-		// 实现心跳的View
 		imageView.startAnimation(animationSet);
 	}
 
 	/**
-	 * 打Log ShowLog
-	 * 
-	 * @return void
-	 * @throws
+	 * ShowLog
 	 */
 	public void ShowLog(String msg) {
-		Log.i("life", msg);
+		Log.i("Emm", msg);
 	}
 }

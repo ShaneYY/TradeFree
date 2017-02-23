@@ -7,8 +7,12 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+import android.support.v7.widget.RecyclerView;
+import com.example.siyangzhang.tradefree.Bean.Item;
 import com.example.siyangzhang.tradefree.R;
+import com.example.siyangzhang.tradefree.ACache;
+
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
