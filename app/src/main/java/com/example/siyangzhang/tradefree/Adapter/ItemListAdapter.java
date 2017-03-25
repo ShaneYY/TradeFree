@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.example.siyangzhang.tradefree.ACache;
+import com.example.siyangzhang.tradefree.Util.ACache;
 import com.example.siyangzhang.tradefree.R;
 import com.example.siyangzhang.tradefree.Bean.Item;
 

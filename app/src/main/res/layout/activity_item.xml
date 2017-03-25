@@ -86,15 +86,27 @@
             android:src="@drawable/droidman01"
             android:visibility="visible" />
 
+
         <ImageView
             android:id="@+id/picb"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignTop="@+id/pica"
             android:layout_marginRight="50dp"
             android:src="@drawable/droidman02"
-            android:visibility="visible" />
+            android:visibility="visible"
+            android:layout_alignParentBottom="true"
+            android:layout_toEndOf="@+id/pica"
+            android:layout_marginStart="29dp" />
+
+        <ImageButton
+            android:id="@+id/add_pictures"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:visibility="visible"
+            android:background="@drawable/men_scan_icon"
+            android:layout_alignParentTop="true"
+            android:layout_alignStart="@+id/picb"
+            android:layout_marginStart="128dp" />
 
     </RelativeLayout>
 

@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "376342948803",
+    "firebase_url": "https://tradefree-160320.firebaseio.com",
+    "project_id": "tradefree-160320",
+    "storage_bucket": "tradefree-160320.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:376342948803:android:71305adbf3d6bd32",
+        "android_client_info": {
+          "package_name": "com.example.siyangzhang.tradefree"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "376342948803-4e709lddvptspe6bajbos7bt3tgvt4aq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDPAVNPGC8MBHFwKVAuqlzWUPMCdlszYpE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

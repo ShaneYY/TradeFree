@@ -1,19 +1,17 @@
-package com.example.siyangzhang.tradefree.fragment;
+package com.example.siyangzhang.tradefree.Fragment;
 
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 
-import com.example.siyangzhang.tradefree.ACache;
+import com.example.siyangzhang.tradefree.Util.ACache;
 import com.example.siyangzhang.tradefree.Activity.ItemShow;
 import com.example.siyangzhang.tradefree.Activity.PublishItemActivity;
 import com.example.siyangzhang.tradefree.Adapter.ItemListAdapter;
@@ -25,7 +23,7 @@ import java.util.List;
 
 public class IndexFragment extends BaseFragment {
     // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    // the Fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -50,7 +48,7 @@ public class IndexFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        // Inflate the layout for this Fragment
         if (getArguments() != null) {
             title = getArguments().getString(TITLE);
         }
@@ -64,7 +62,7 @@ public class IndexFragment extends BaseFragment {
             @Override
             public void onItemClick(View view, int position) {
                 Intent intent = new Intent(getActivity(), ItemShow.class);
-                intent.putExtra(Item_Info, mItemMessage.get(position).getTitle() + mItemMessage.get(position).getDetail());
+                intent.putExtra(Item_Info, mItemMessage.get(position).getImage().getFilename());
                 startActivity(intent);
             }
 
@@ -96,11 +94,10 @@ public class IndexFragment extends BaseFragment {
             switch (requestCode) {
                 case PUBLISHITEM:
                     Item item = (Item) data.getSerializableExtra(Item_Info);
-
+                    String info = item.getTitle() + item.getDetail() + item.getPrice();
                     mItemMessage.add(item);
                     mCache=ACache.get(getContext());
-                    mCache.put(item.getDetail(),item,2*ACache.TIME_DAY);
-
+                    mCache.put(info,item,2*ACache.TIME_DAY);
                     mAdapter.notifyDataSetChanged();
                     // Log.d("testPublish", partTimeJob.getTitle() + "-----" + partTimeJob.getContent());
                     break;
@@ -136,7 +133,7 @@ public class IndexFragment extends BaseFragment {
 
     /**
      * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
+     * Fragment to allow an interaction in this Fragment to be communicated
      * to the activity and potentially other fragments contained in that
      * activity.
      * <p>

@@ -15,11 +15,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.siyangzhang.tradefree.R;
-import com.example.siyangzhang.tradefree.ACache;
-import com.example.siyangzhang.tradefree.fragment.IndexFragment;
-import com.example.siyangzhang.tradefree.fragment.CategFragment;
-import com.example.siyangzhang.tradefree.fragment.NearbyFragment;
-import com.example.siyangzhang.tradefree.fragment.ProfileFragment;
+import com.example.siyangzhang.tradefree.Util.ACache;
+import com.example.siyangzhang.tradefree.Fragment.IndexFragment;
+import com.example.siyangzhang.tradefree.Fragment.CategFragment;
+import com.example.siyangzhang.tradefree.Fragment.NearbyFragment;
+import com.example.siyangzhang.tradefree.Fragment.ProfileFragment;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
@@ -179,7 +179,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         fm = getSupportFragmentManager();
         if(fm!=null) {
             fm.beginTransaction()
-                    .replace(R.id.fmcontent, targetFragment, "fragment")
+                    .replace(R.id.fmcontent, targetFragment, "Fragment")
                     .setTransitionStyle(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                     .commit();
         }

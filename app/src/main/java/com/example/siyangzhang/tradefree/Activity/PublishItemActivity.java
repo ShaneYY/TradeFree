@@ -4,10 +4,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
@@ -15,15 +17,20 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.util.Log;
-import com.example.siyangzhang.tradefree.ACache;
+
+import com.example.siyangzhang.tradefree.Bean.Photo;
+import com.example.siyangzhang.tradefree.Fragment.ImageFragment;
+import com.example.siyangzhang.tradefree.Fragment.TestCameraFragment;
+import com.example.siyangzhang.tradefree.Util.ACache;
 import com.example.siyangzhang.tradefree.Bean.User;
 import com.example.siyangzhang.tradefree.R;
-import com.example.siyangzhang.tradefree.fragment.IndexFragment;
+import com.example.siyangzhang.tradefree.Fragment.IndexFragment;
 import com.example.siyangzhang.tradefree.Bean.Item;
+import com.example.siyangzhang.tradefree.Util.PictureUtils;
 
 import java.io.FileNotFoundException;
 import java.text.SimpleDateFormat;
@@ -40,23 +47,30 @@ public class PublishItemActivity extends FragmentActivity {
     private FrameLayout mIndicator;
     private Button publish;
     private int IndicatorWidth;
-    private ImageView addPictures;
+    private ImageButton mPhotoButton;
+    private ImageView mPhotoView;
     private List<Item> Testitem=new ArrayList<>();
-
+    private User mUser = new User();
+    private Item mItem = new Item();
     private EditText mTitle;
     private EditText mPrice;
     private EditText mDetail;
     private EditText mType;
+    private Callbacks mCallbacks;
 
     public static final int CROP_PHOTO=1;
     public static final int SELECT_PHOTO=2;
-
+    public static final int REQUEST_PHOTO=3;
     private static final String TAG = "PublishItem";
+    private static final String DIALOG_IMAGE = "image";
 
     Intent intent;
 
     private SimpleDateFormat simpleDateFormat;
 
+    public interface Callbacks{
+        void onItemUpdated(Item item);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +80,7 @@ public class PublishItemActivity extends FragmentActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_item);
 
+        mPhotoButton = (ImageButton) findViewById(R.id.add_pictures);
         publish = (Button) findViewById(R.id.publish);
         simpleDateFormat=new SimpleDateFormat("yyyy-MM");
         initEvents();
@@ -90,42 +105,55 @@ public class PublishItemActivity extends FragmentActivity {
     }
 
     private void initEvents() {
+
+        // Photo Button
+        mPhotoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(PublishItemActivity.this, TestCameraActivity.class);
+                startActivityForResult(i, REQUEST_PHOTO);
+            }
+        });
+
         publish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mTitle = (EditText) findViewById(R.id.title);
                 mDetail = (EditText) findViewById(R.id.detail);
-                User user = new User();
-                user.setUserId(UUID.randomUUID());
-                user.setName("Shane");
-                Item item = new Item();
-                item.setItemId(UUID.randomUUID());
-                item.setTitle(mTitle.getText().toString());
-                item.setDetail(mDetail.getText().toString());
-                item.setUser(user);
+                mUser.setUserId(UUID.randomUUID());
+                mUser.setName("Shane");
+                mItem.setItemId(UUID.randomUUID());
+                mItem.setTitle(mTitle.getText().toString());
+                mItem.setDetail(mDetail.getText().toString());
+                mItem.setUser(mUser);
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                item.setTime(simpleDateFormat.format(new Date()));
+                mItem.setTime(simpleDateFormat.format(new Date()));
 
                 intent = new Intent();
-                intent.putExtra(IndexFragment.Item_Info, item);
-                MainActivity.mCache.put(simpleDateFormat.format(new Date()) + "", item, 2 * ACache.TIME_DAY);
+                intent.putExtra(IndexFragment.Item_Info, mItem);
+                MainActivity.mCache.put(simpleDateFormat.format(new Date()) + "", mItem, 2 * ACache.TIME_DAY);
                 setResult(IndexFragment.PUBLISHITEM, intent);
 
                 finish();
             }
         });
-    }
 
-    public void hideAddPictures() {
-        if (addPictures.getVisibility() == View.VISIBLE) {
-            addPictures.setVisibility(View.GONE);
-        }
-    }
+        // Photographic Evidence
+        mPhotoView = (ImageView) findViewById(R.id.pica);
+        mPhotoView.setOnClickListener(new View.OnClickListener() {
 
-    public void showAddPictures() {
-        if (addPictures.getVisibility() == View.GONE) {
-            addPictures.setVisibility(View.VISIBLE);
-        }
+            @Override
+            public void onClick(View v) {
+                Photo p = mItem.getImage();
+                if ( p == null ){
+                    return;
+                }
+                FragmentManager fm = getSupportFragmentManager();
+                String path = getFileStreamPath(p.getFilename()).getAbsolutePath();
+                ImageFragment.newInstance(path).show(fm, DIALOG_IMAGE);
+            }
+        });
+
     }
 
     public static void startPublishItemActivity(Context context, String... data) {
@@ -174,12 +202,37 @@ public class PublishItemActivity extends FragmentActivity {
                         e.printStackTrace();
                     }
                     break;
+                case REQUEST_PHOTO:
+                    // Create a new Photo object and attach it to the test
+                    String filename = data.getStringExtra(TestCameraFragment.EXTRA_PHOTO_FILENAME);
+
+                    if ( filename != null ){
+                        Photo p = new Photo(filename);
+                        mItem.setImage(p);
+                        //mCallbacks.onItemUpdated(mItem);
+                        showPhoto();
+                    }
+                    break;
                 default:
                     break;
             }
         }else{
             return;
         }
+    }
+
+    private void showPhoto() {
+        // (Re)set the image button's image based on our photo
+        Photo p = mItem.getImage();
+        BitmapDrawable b = null;
+
+        Log.d(TAG, "Inside showPhoto");
+
+        if ( p != null ){
+            String path = getFileStreamPath(p.getFilename()).getAbsolutePath();
+            b = PictureUtils.getScaledDrawable(this, path);
+        }
+        mPhotoView.setImageDrawable(b);
     }
 }
 

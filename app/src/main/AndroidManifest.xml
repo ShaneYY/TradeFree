@@ -7,6 +7,10 @@
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
 
+    <uses-feature android:name="android.hardware.CAMERA" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -25,6 +29,12 @@
         <activity android:name=".Activity.MainActivity"></activity>
         <activity android:name=".Activity.PublishItemActivity"></activity>
         <activity android:name=".Activity.ItemShow"></activity>
+
+        <activity
+            android:name=".Activity.TestCameraActivity"
+            android:screenOrientation="landscape"
+            android:label="@string/app_name" >
+        </activity>
     </application>
 
 </manifest>
