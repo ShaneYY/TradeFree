@@ -1,4 +1,4 @@
-package com.example.siyangzhang.tradefree.fragment;
+package com.example.siyangzhang.tradefree.Fragment;
 
 import android.content.Context;
 import android.net.Uri;
@@ -7,24 +7,20 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.support.v7.widget.RecyclerView;
-import com.example.siyangzhang.tradefree.Bean.Item;
-import com.example.siyangzhang.tradefree.R;
-import com.example.siyangzhang.tradefree.ACache;
 
-import java.util.List;
+import com.example.siyangzhang.tradefree.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
+ * Activities that contain this Fragment must implement the
  * {@link CategFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
  * Use the {@link CategFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * create an instance of this Fragment.
  */
 public class CategFragment extends BaseFragment {
     // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    // the Fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -40,11 +36,11 @@ public class CategFragment extends BaseFragment {
 
     /**
      * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
+     * this Fragment using the provided parameters.
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment CategFragment.
+     * @return A new instance of Fragment CategFragment.
      */
     // TODO: Rename and change types and number of parameters
     public static CategFragment newInstance(String param1, String param2) {
@@ -68,7 +64,7 @@ public class CategFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        // Inflate the layout for this Fragment
         return inflater.inflate(R.layout.fragment_categ, container, false);
     }
 
@@ -86,7 +82,7 @@ public class CategFragment extends BaseFragment {
             mListener = (OnFragmentInteractionListener) context;
         } else {
             //throw new RuntimeException(context.toString()
-              //      + " must implement OnFragmentInteractionListener");
+            //      + " must implement OnFragmentInteractionListener");
         }
     }
 
@@ -98,7 +94,7 @@ public class CategFragment extends BaseFragment {
 
     /**
      * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
+     * Fragment to allow an interaction in this Fragment to be communicated
      * to the activity and potentially other fragments contained in that
      * activity.
      * <p>

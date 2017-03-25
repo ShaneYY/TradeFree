@@ -2,7 +2,7 @@
  *  ASimpleCache is open source cache framework designed for android.
  *  We use ACache to store Item/User object data for unit testing.
  */
-package com.example.siyangzhang.tradefree;
+package com.example.siyangzhang.tradefree.Util;
 
 import android.content.Context;
 import android.graphics.Bitmap;

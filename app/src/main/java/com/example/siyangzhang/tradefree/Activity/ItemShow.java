@@ -2,21 +2,26 @@ package com.example.siyangzhang.tradefree.Activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.siyangzhang.tradefree.Bean.Photo;
 import com.example.siyangzhang.tradefree.R;
-import com.example.siyangzhang.tradefree.fragment.IndexFragment;
+import com.example.siyangzhang.tradefree.Fragment.IndexFragment;
+import com.example.siyangzhang.tradefree.Util.PictureUtils;
 
 import java.io.FileNotFoundException;
 
 public class ItemShow extends Activity {
 
     private TextView itemShow;
+    private ImageView imageShow;
     private final String TAG = "ItemShow";
 
     @Override
@@ -26,11 +31,15 @@ public class ItemShow extends Activity {
         setContentView(R.layout.activity_itemshow);
 
         itemShow = (TextView) findViewById(R.id.item_show);
-
+        imageShow = (ImageView) findViewById(R.id.image_show);
         Intent intent = getIntent();
         String str = intent.getStringExtra(IndexFragment.Item_Info);
-        itemShow.append(Html.fromHtml(str, imageGetter, null));
+        String path = getFileStreamPath(str).getAbsolutePath();
+        BitmapDrawable b = PictureUtils.getScaledDrawable(this, path);
+
+        imageShow.setImageDrawable(b);
     }
+
     @Override
     protected void onResume() {
         Log.d(TAG, "Activity onResume");

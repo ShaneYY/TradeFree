@@ -1,4 +1,4 @@
-package com.example.siyangzhang.tradefree.fragment;
+package com.example.siyangzhang.tradefree.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
