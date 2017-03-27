@@ -1,13 +1,16 @@
 package com.example.siyangzhang.tradefree.Fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
+import com.example.siyangzhang.tradefree.Activity.ViewCategActivity;
 import com.example.siyangzhang.tradefree.R;
 
 /**
@@ -18,7 +21,7 @@ import com.example.siyangzhang.tradefree.R;
  * Use the {@link CategFragment#newInstance} factory method to
  * create an instance of this Fragment.
  */
-public class CategFragment extends BaseFragment {
+public class CategFragment extends BaseFragment implements View.OnClickListener{
     // TODO: Rename parameter arguments, choose names that match
     // the Fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -29,6 +32,9 @@ public class CategFragment extends BaseFragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+
+    private View.OnClickListener btnTVListener;
+    private ImageButton btnTV;
 
     public CategFragment() {
         // Required empty public constructor
@@ -55,17 +61,48 @@ public class CategFragment extends BaseFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
+        /*if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+        }*/
+
+
+               // .setOnClickListener(this);
+
+
+    }
+
+    @Override
+    public void onClick(View view) {
+        Intent intent = new Intent();
+        switch (view.getId()) {
+            case R.id.ImageView01:
+                intent.setClass(getActivity(), ViewCategActivity.class);
+                intent.putExtra("type", "TV");
+                startActivity(intent);
+                break;
+            case R.id.id_class:
+                //setSelect(1);
+                break;
+            case R.id.id_find:
+                //setSelect(2);
+                break;
+            case R.id.id_me:
+                //setSelect(3);
+                break;
         }
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this Fragment
-        return inflater.inflate(R.layout.fragment_categ, container, false);
+        //btnTV = (ImageButton) findViewById();
+        View result = inflater.inflate(R.layout.fragment_categ, container, false);
+        btnTV = (ImageButton) result.findViewById(R.id.ImageView01);
+        btnTV.setOnClickListener(this);
+        return result;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

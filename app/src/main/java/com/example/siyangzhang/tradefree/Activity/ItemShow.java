@@ -2,6 +2,7 @@ package com.example.siyangzhang.tradefree.Activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -11,6 +12,7 @@ import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.siyangzhang.tradefree.Bean.Db;
 import com.example.siyangzhang.tradefree.Bean.Photo;
 import com.example.siyangzhang.tradefree.R;
 import com.example.siyangzhang.tradefree.Fragment.IndexFragment;
@@ -24,11 +26,18 @@ public class ItemShow extends Activity {
     private ImageView imageShow;
     private final String TAG = "ItemShow";
 
+    private Db db;
+    private SQLiteDatabase dbRead;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d(TAG, "Activity onCreate");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_itemshow);
+
+        db = new Db(this);
+        dbRead = db.getReadableDatabase();
+
 
         itemShow = (TextView) findViewById(R.id.item_show);
         imageShow = (ImageView) findViewById(R.id.image_show);
@@ -38,6 +47,7 @@ public class ItemShow extends Activity {
         BitmapDrawable b = PictureUtils.getScaledDrawable(this, path);
 
         imageShow.setImageDrawable(b);
+        imageShow.setRotation(90);
     }
 
     @Override

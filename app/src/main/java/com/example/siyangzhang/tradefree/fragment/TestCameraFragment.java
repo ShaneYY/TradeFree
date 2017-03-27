@@ -93,6 +93,7 @@ public class TestCameraFragment extends Fragment {
 				// Tell the camera to use this surface as its preview area
 				try {
 					if( mCamera != null ){
+						mCamera.setDisplayOrientation(90);
 						mCamera.setPreviewDisplay(holder);
 					}
 				} catch (IOException e) {
