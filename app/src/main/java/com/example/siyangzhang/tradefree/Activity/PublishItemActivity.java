@@ -1,7 +1,9 @@
 package com.example.siyangzhang.tradefree.Activity;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -14,14 +16,17 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.util.Log;
 
+import com.example.siyangzhang.tradefree.Bean.Db;
 import com.example.siyangzhang.tradefree.Bean.Photo;
 import com.example.siyangzhang.tradefree.Fragment.ImageFragment;
 import com.example.siyangzhang.tradefree.Fragment.TestCameraFragment;
@@ -55,7 +60,11 @@ public class PublishItemActivity extends FragmentActivity {
     private EditText mTitle;
     private EditText mPrice;
     private EditText mDetail;
-    private EditText mType;
+    private Spinner mType;
+    //private EditText mType;
+
+    private String selectedType;
+    private String filename;
     private Callbacks mCallbacks;
 
     public static final int CROP_PHOTO=1;
@@ -67,6 +76,10 @@ public class PublishItemActivity extends FragmentActivity {
     Intent intent;
 
     private SimpleDateFormat simpleDateFormat;
+
+    private Db db;
+    private SQLiteDatabase dbWrite;
+
 
     public interface Callbacks{
         void onItemUpdated(Item item);
@@ -80,7 +93,11 @@ public class PublishItemActivity extends FragmentActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_item);
 
+        db = new Db(this);
+        dbWrite = db.getWritableDatabase();
+
         mPhotoButton = (ImageButton) findViewById(R.id.add_pictures);
+        mType = (Spinner) findViewById(R.id.type_spinner);
         publish = (Button) findViewById(R.id.publish);
         simpleDateFormat=new SimpleDateFormat("yyyy-MM");
         initEvents();
@@ -106,6 +123,20 @@ public class PublishItemActivity extends FragmentActivity {
 
     private void initEvents() {
 
+        mType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(
+                    AdapterView<?> adapterView, View view,
+                    int i, long l) {
+                selectedType = mType.getSelectedItem().toString();
+            }
+
+            public void onNothingSelected(
+                    AdapterView<?> adapterView) {
+
+            }
+        });
+
+        publish.setEnabled(false);
         // Photo Button
         mPhotoButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,6 +151,18 @@ public class PublishItemActivity extends FragmentActivity {
             public void onClick(View v) {
                 mTitle = (EditText) findViewById(R.id.title);
                 mDetail = (EditText) findViewById(R.id.detail);
+
+                ContentValues cv = new ContentValues();
+                cv.put("SellerID", UUID.randomUUID().toString());
+                cv.put("ItemTitle", mTitle.getText().toString());
+                //cv.put("Price", );
+                cv.put("Detail", mDetail.getText().toString());
+                cv.put("Type", selectedType.toString());
+
+                dbWrite.insert("ITEM", null, cv);
+
+
+
                 mUser.setUserId(UUID.randomUUID());
                 mUser.setName("Shane");
                 mItem.setItemId(UUID.randomUUID());
@@ -132,6 +175,7 @@ public class PublishItemActivity extends FragmentActivity {
                 intent = new Intent();
                 intent.putExtra(IndexFragment.Item_Info, mItem);
                 MainActivity.mCache.put(simpleDateFormat.format(new Date()) + "", mItem, 2 * ACache.TIME_DAY);
+
                 setResult(IndexFragment.PUBLISHITEM, intent);
 
                 finish();
@@ -204,12 +248,13 @@ public class PublishItemActivity extends FragmentActivity {
                     break;
                 case REQUEST_PHOTO:
                     // Create a new Photo object and attach it to the test
-                    String filename = data.getStringExtra(TestCameraFragment.EXTRA_PHOTO_FILENAME);
+                    filename = data.getStringExtra(TestCameraFragment.EXTRA_PHOTO_FILENAME);
 
                     if ( filename != null ){
                         Photo p = new Photo(filename);
                         mItem.setImage(p);
                         //mCallbacks.onItemUpdated(mItem);
+                        publish.setEnabled(true);
                         showPhoto();
                     }
                     break;
@@ -233,6 +278,7 @@ public class PublishItemActivity extends FragmentActivity {
             b = PictureUtils.getScaledDrawable(this, path);
         }
         mPhotoView.setImageDrawable(b);
+        mPhotoView.setRotation(90);
     }
 }
 

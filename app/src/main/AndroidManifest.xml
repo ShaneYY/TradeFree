@@ -7,9 +7,30 @@
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
 
-    <uses-feature android:name="android.hardware.CAMERA" />
+    <!--
+         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
+         Google Maps Android API v2, but you must specify either coarse or fine
+         location permissions for the 'MyLocation' functionality.
+    -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="com.wei.android.beginning.permission.MAPS_RECEIVE" />
+    <!-- 步骤（3）设置使用Google Map服务所需的许可 -->
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- Google Map是互联网业务，允许互联网 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- 允许API检查网络连接状态，已确定是否可以下载数据 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- 允许将Google地图数据缓存在SD卡上 -->
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" /> <!-- 允许API访问Google的基于Web的业务 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- 地图应用经常和定位相关，允许粗定位 -->
+
+
+    <!-- 步骤（4）Google Map v2需要OpenGL ES，需要用uses-feature中声明 -->
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
+
+    <!-- Camera permission -->
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -26,15 +47,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity.MainActivity"></activity>
-        <activity android:name=".Activity.PublishItemActivity"></activity>
-        <activity android:name=".Activity.ItemShow"></activity>
-
-        <activity
-            android:name=".Activity.TestCameraActivity"
-            android:screenOrientation="landscape"
-            android:label="@string/app_name" >
-        </activity>
+        <activity android:name=".Activity.MainActivity" />
+        <activity android:name=".Activity.PublishItemActivity" />
+        <activity android:name=".Activity.ViewCategActivity" />
+        <activity android:name=".Activity.ItemShow" />
+        <activity android:name=".Activity.TestCameraActivity" />
+        <!--
+             The API key for Google Maps-based APIs is defined as a string resource.
+             (See the file "res/values/google_maps_api.xml").
+             Note that the API key is linked to the encryption key used to sign the APK.
+             You need a different API key for each encryption key, including the release key that is used to
+             sign the APK for publishing.
+             You can define the keys for the debug and release targets in src/debug/ and src/release/.
+        -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
     </application>
 
 </manifest>
