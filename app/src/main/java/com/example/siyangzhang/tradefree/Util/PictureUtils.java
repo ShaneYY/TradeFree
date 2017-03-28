@@ -22,7 +22,7 @@ public class PictureUtils {
 		
 		Display display = a.getWindowManager().getDefaultDisplay();
 		float destWidth = display.getWidth();
-		float destHeight = display.getHeight();
+		float destHeight = display.getWidth();
 		
 		// Read in the dimensions of the image on disk
 		BitmapFactory.Options options = new BitmapFactory.Options();
@@ -30,7 +30,7 @@ public class PictureUtils {
 		BitmapFactory.decodeFile(path, options);
 		
 		float srcWidth = options.outWidth;
-		float srcHeight = options.outHeight;
+		float srcHeight = options.outWidth;
 		
 		Log.d(TAG, "srcWidth: " + srcWidth);
 		Log.d(TAG, "srcHeight: " + srcHeight);

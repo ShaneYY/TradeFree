@@ -24,10 +24,13 @@
     <string name="title_activity_maps">Map</string>
     <string name="type_prompt">Choose a type</string>
     <string-array name="type">
+        <item>PC</item>
         <item>TV</item>
-        <item>AV</item>
-        <item>BV</item>
-        <item>CV</item>
-        <item>DV</item>
+        <item>CL</item>
+        <item>PH</item>
+        <item>CM</item>
+        <item>FD</item>
+        <item>TB</item>
+        <item>BC</item>
     </string-array>
 </resources>

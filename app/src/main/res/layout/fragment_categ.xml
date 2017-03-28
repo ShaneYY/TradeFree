@@ -6,107 +6,220 @@
 
     <TableLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal" >
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical" >
+
+        <TableRow
+            android:id="@+id/tableRow1"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp" >
+
+            <RelativeLayout
+                android:layout_gravity="center"
+                android:layout_weight="1">
+                <ImageView
+                    android:id="@+id/ImageView01"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/type1" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/ImageView01"
+                    android:layout_alignRight="@+id/ImageView01"
+                    android:layout_alignBottom="@+id/ImageView01"
+                    android:layout_margin="1dp"
+                    android:gravity="center"
+                    android:text="Laptop"
+                    android:textSize="30dp"
+                    android:textColor="#000000" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_gravity="center"
+                android:layout_weight="1">
+                <ImageView
+                    android:id="@+id/ImageView02"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/type2" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/ImageView02"
+                    android:layout_alignRight="@+id/ImageView02"
+                    android:layout_alignBottom="@+id/ImageView02"
+                    android:layout_margin="1dp"
+                    android:gravity="center"
+                    android:text="Teevee"
+                    android:textSize="30dp"
+                    android:textColor="#000000" />
+            </RelativeLayout>
+
+        </TableRow>
 
         <TableRow
             android:id="@+id/tableRow2"
+            android:layout_weight="1"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+            android:layout_height="0dp" >
 
-            <ImageButton
-                android:id="@+id/ImageView01"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@drawable/type1" />
+            <RelativeLayout
+                android:layout_gravity="center"
+                android:layout_weight="1">
+                <ImageView
+                    android:id="@+id/ImageView03"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/type3" />
 
-            <ImageView
-                android:id="@+id/ImageView02"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@drawable/type2" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/ImageView03"
+                    android:layout_alignRight="@+id/ImageView03"
+                    android:layout_alignBottom="@+id/ImageView03"
+                    android:layout_margin="1dp"
+                    android:gravity="center"
+                    android:text="Calcula"
+                    android:textSize="30dp"
+                    android:textColor="#000000" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_gravity="center"
+                android:layout_weight="1">
+                <ImageView
+                    android:id="@+id/ImageView04"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/type4" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/ImageView04"
+                    android:layout_alignRight="@+id/ImageView04"
+                    android:layout_alignBottom="@+id/ImageView04"
+                    android:layout_margin="1dp"
+                    android:gravity="center"
+                    android:text="Phone"
+                    android:textSize="30dp"
+                    android:textColor="#000000" />
+            </RelativeLayout>
         </TableRow>
 
         <TableRow
             android:id="@+id/tableRow3"
+            android:layout_weight="1"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+            android:layout_height="0dp" >
 
-            <ImageView
-                android:id="@+id/ImageView03"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@drawable/type3" />
+            <RelativeLayout
+                android:layout_gravity="center"
+                android:layout_weight="1">
+                <ImageView
+                    android:id="@+id/ImageView05"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/type5" />
 
-            <ImageView
-                android:id="@+id/ImageView04"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@drawable/type4" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/ImageView05"
+                    android:layout_alignRight="@+id/ImageView05"
+                    android:layout_alignBottom="@+id/ImageView05"
+                    android:layout_margin="1dp"
+                    android:gravity="center"
+                    android:text="Camera"
+                    android:textSize="30dp"
+                    android:textColor="#000000" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_gravity="center"
+                android:layout_weight="1">
+                <ImageView
+                    android:id="@+id/ImageView06"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/type6" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/ImageView06"
+                    android:layout_alignRight="@+id/ImageView06"
+                    android:layout_alignBottom="@+id/ImageView06"
+                    android:layout_margin="1dp"
+                    android:gravity="center"
+                    android:text="Fdrive"
+                    android:textSize="30dp"
+                    android:textColor="#000000" />
+            </RelativeLayout>
         </TableRow>
 
         <TableRow
             android:id="@+id/tableRow4"
+            android:layout_weight="1"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+            android:layout_height="0dp" >
 
-            <ImageView
-                android:id="@+id/ImageView05"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@drawable/type5" />
+            <RelativeLayout
+                android:layout_gravity="center"
+                android:layout_weight="1">
+                <ImageView
+                    android:id="@+id/ImageView07"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/type7" />
 
-            <ImageView
-                android:id="@+id/ImageView06"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@drawable/type6" />
-        </TableRow>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/ImageView07"
+                    android:layout_alignRight="@+id/ImageView07"
+                    android:layout_alignBottom="@+id/ImageView07"
+                    android:layout_margin="1dp"
+                    android:gravity="center"
+                    android:text="Txtbook"
+                    android:textSize="30dp"
+                    android:textColor="#000000" />
+            </RelativeLayout>
 
-        <TableRow
-            android:id="@+id/tableRow5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+            <RelativeLayout
+                android:layout_gravity="center"
+                android:layout_weight="1">
+                <ImageView
+                    android:id="@+id/ImageView08"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/type8" />
 
-            <ImageView
-                android:id="@+id/ImageView07"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@drawable/type7" />
-
-            <ImageView
-                android:id="@+id/ImageView08"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@drawable/type8" />
-        </TableRow>
-
-        <TableRow
-            android:id="@+id/tableRow6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-
-            <ImageView
-                android:id="@+id/ImageView09"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@drawable/type9" />
-
-            <ImageView
-                android:id="@+id/ImageView10"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@drawable/type10" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/ImageView08"
+                    android:layout_alignRight="@+id/ImageView08"
+                    android:layout_alignBottom="@+id/ImageView08"
+                    android:layout_margin="1dp"
+                    android:gravity="center"
+                    android:text="Bicycle"
+                    android:textSize="30dp"
+                    android:textColor="#000000" />
+            </RelativeLayout>
         </TableRow>
 
     </TableLayout>
