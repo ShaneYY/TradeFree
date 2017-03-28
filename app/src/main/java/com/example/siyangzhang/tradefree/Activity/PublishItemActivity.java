@@ -150,12 +150,13 @@ public class PublishItemActivity extends FragmentActivity {
             @Override
             public void onClick(View v) {
                 mTitle = (EditText) findViewById(R.id.title);
+                mPrice = (EditText) findViewById(R.id.price);
                 mDetail = (EditText) findViewById(R.id.detail);
 
                 ContentValues cv = new ContentValues();
                 cv.put("SellerID", UUID.randomUUID().toString());
                 cv.put("ItemTitle", mTitle.getText().toString());
-                //cv.put("Price", );
+                //cv.put("Price", mPrice.getText().toString());
                 cv.put("Detail", mDetail.getText().toString());
                 cv.put("Type", selectedType.toString());
 
@@ -167,6 +168,7 @@ public class PublishItemActivity extends FragmentActivity {
                 mUser.setName("Shane");
                 mItem.setItemId(UUID.randomUUID());
                 mItem.setTitle(mTitle.getText().toString());
+                mItem.setPrice(mPrice.getText().toString());
                 mItem.setDetail(mDetail.getText().toString());
                 mItem.setUser(mUser);
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -278,7 +280,6 @@ public class PublishItemActivity extends FragmentActivity {
             b = PictureUtils.getScaledDrawable(this, path);
         }
         mPhotoView.setImageDrawable(b);
-        mPhotoView.setRotation(90);
     }
 }
 

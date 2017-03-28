@@ -54,12 +54,15 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemViewHolder> {
     @Override
     public void onBindViewHolder(ItemViewHolder holder, int position) {
         holder.title.setText(ItemDatas.get(position).getTitle());
-        String strdetail=ItemDatas.get(position).getDetail();
+        holder.price.setText("$"+ItemDatas.get(position).getPrice());
+        holder.detail.setText(ItemDatas.get(position).getDetail());
+        /*
         Pattern p2= Pattern.compile("<img src=.*>");
         Matcher m=p2.matcher(strdetail);
         while (m.find()) {
             holder.detail.setText(strdetail.replaceAll(m.group(), "Photo"));
         }
+        */
         setUpItemEvent(holder);
     }
     @Override
@@ -94,13 +97,14 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemViewHolder> {
 
 class ItemViewHolder extends RecyclerView.ViewHolder{
 
-    TextView title,detail;
+    TextView title,detail,price;
     ImageButton like;
 
     public ItemViewHolder(View itemView) {
         super(itemView);
         title= (TextView) itemView.findViewById(R.id.item_title);
         detail= (TextView) itemView.findViewById(R.id.item_detail);
+        price= (TextView) itemView.findViewById(R.id.item_price);
         like= (ImageButton) itemView.findViewById(R.id.item_like);
 
     }

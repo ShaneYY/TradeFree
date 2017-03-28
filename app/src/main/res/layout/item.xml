@@ -17,15 +17,23 @@
         android:textSize="20dp"
         android:maxLines="1"/>
 
+
     <TextView
-        android:id="@+id/item_detail"
+        android:id="@+id/item_price"
         android:layout_below="@+id/item_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:text="01-28 02:15:01.000 576-621/system_process D/ConnectivityService: Done.
-        01-28 02:15:01.004 576-621/system_process D/ConnectivityService:Setting timer for 720seconds"
-        android:lines="4"/>
+        tools:text="Price :"
+        android:lines="1"/>
 
+
+    <TextView
+        android:id="@+id/item_detail"
+        android:layout_below="@+id/item_price"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="Detail :"
+        android:lines="1"/>
 
     <ImageButton
         android:id="@+id/item_like"

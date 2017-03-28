@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import com.example.siyangzhang.tradefree.Activity.ViewCategActivity;
 import com.example.siyangzhang.tradefree.R;
@@ -16,7 +17,7 @@ import com.example.siyangzhang.tradefree.R;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this Fragment must implement the
- * {@link CategFragment.OnFragmentInteractionListener} interface
+ * {@link OnFragmentInteractionListener} interface
  * to handle interaction events.
  * Use the {@link CategFragment#newInstance} factory method to
  * create an instance of this Fragment.
@@ -33,8 +34,14 @@ public class CategFragment extends BaseFragment implements View.OnClickListener{
 
     private OnFragmentInteractionListener mListener;
 
-    private View.OnClickListener btnTVListener;
-    private ImageButton btnTV;
+    private ImageView btnPC;
+    private ImageView btnTV;
+    private ImageView btnCL;
+    private ImageView btnPH;
+    private ImageView btnCM;
+    private ImageView btnFD;
+    private ImageView btnTB;
+    private ImageView btnBC;
 
     public CategFragment() {
         // Required empty public constructor
@@ -61,14 +68,6 @@ public class CategFragment extends BaseFragment implements View.OnClickListener{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        /*if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }*/
-
-
-               // .setOnClickListener(this);
-
 
     }
 
@@ -78,17 +77,43 @@ public class CategFragment extends BaseFragment implements View.OnClickListener{
         switch (view.getId()) {
             case R.id.ImageView01:
                 intent.setClass(getActivity(), ViewCategActivity.class);
+                intent.putExtra("type", "PC");
+                startActivity(intent);
+                break;
+            case R.id.ImageView02:
+                intent.setClass(getActivity(), ViewCategActivity.class);
                 intent.putExtra("type", "TV");
                 startActivity(intent);
                 break;
-            case R.id.id_class:
-                //setSelect(1);
+            case R.id.ImageView03:
+                intent.setClass(getActivity(), ViewCategActivity.class);
+                intent.putExtra("type", "CL");
+                startActivity(intent);
                 break;
-            case R.id.id_find:
-                //setSelect(2);
+            case R.id.ImageView04:
+                intent.setClass(getActivity(), ViewCategActivity.class);
+                intent.putExtra("type", "PH");
+                startActivity(intent);
                 break;
-            case R.id.id_me:
-                //setSelect(3);
+            case R.id.ImageView05:
+                intent.setClass(getActivity(), ViewCategActivity.class);
+                intent.putExtra("type", "CM");
+                startActivity(intent);
+                break;
+            case R.id.ImageView06:
+                intent.setClass(getActivity(), ViewCategActivity.class);
+                intent.putExtra("type", "FD");
+                startActivity(intent);
+                break;
+            case R.id.ImageView07:
+                intent.setClass(getActivity(), ViewCategActivity.class);
+                intent.putExtra("type", "TB");
+                startActivity(intent);
+                break;
+            case R.id.ImageView08:
+                intent.setClass(getActivity(), ViewCategActivity.class);
+                intent.putExtra("type", "BC");
+                startActivity(intent);
                 break;
         }
     }
@@ -100,8 +125,22 @@ public class CategFragment extends BaseFragment implements View.OnClickListener{
         // Inflate the layout for this Fragment
         //btnTV = (ImageButton) findViewById();
         View result = inflater.inflate(R.layout.fragment_categ, container, false);
-        btnTV = (ImageButton) result.findViewById(R.id.ImageView01);
+        btnPC = (ImageView) result.findViewById(R.id.ImageView01);
+        btnPC.setOnClickListener(this);
+        btnTV = (ImageView) result.findViewById(R.id.ImageView02);
         btnTV.setOnClickListener(this);
+        btnCL = (ImageView) result.findViewById(R.id.ImageView03);
+        btnCL.setOnClickListener(this);
+        btnPH = (ImageView) result.findViewById(R.id.ImageView04);
+        btnPH.setOnClickListener(this);
+        btnCM = (ImageView) result.findViewById(R.id.ImageView05);
+        btnCM.setOnClickListener(this);
+        btnFD = (ImageView) result.findViewById(R.id.ImageView06);
+        btnFD.setOnClickListener(this);
+        btnTB = (ImageView) result.findViewById(R.id.ImageView07);
+        btnTB.setOnClickListener(this);
+        btnBC = (ImageView) result.findViewById(R.id.ImageView08);
+        btnBC.setOnClickListener(this);
         return result;
     }
 

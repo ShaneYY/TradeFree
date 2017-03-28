@@ -39,6 +39,7 @@ public class ItemShow extends Activity {
         dbRead = db.getReadableDatabase();
 
 
+
         itemShow = (TextView) findViewById(R.id.item_show);
         imageShow = (ImageView) findViewById(R.id.image_show);
         Intent intent = getIntent();
