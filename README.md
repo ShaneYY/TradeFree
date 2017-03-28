@@ -1,6 +1,6 @@
 # TradeFree
 
-On-Campus E-commerce Flea Market Android Application
+On-Campus Flea Market Android Application
 
 CSE5236 Mobile App Development
 
