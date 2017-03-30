@@ -4,6 +4,10 @@ import java.io.Serializable;
 import java.util.UUID;
 import com.google.android.maps.GeoPoint;
 
+/**
+ * Created by siyangzhang on 2/10/17.
+ */
+
 public class User implements Serializable {
     private UUID userId;
     private String name;

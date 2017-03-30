@@ -5,6 +5,10 @@ import org.json.JSONObject;
 
 import java.io.Serializable;
 
+/**
+ * Created by siyangzhang on 2/17/17.
+ */
+
 public class Photo implements Serializable {
 	private static final String JSON_FILENAME = "filename";
 	
