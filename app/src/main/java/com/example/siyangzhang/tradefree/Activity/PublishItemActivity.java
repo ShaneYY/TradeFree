@@ -43,6 +43,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+
+/**
+ * Created by siyangzhang on 2/21/17.
+ */
+
 public class PublishItemActivity extends FragmentActivity {
 
     private ViewPager mViewpager;
@@ -155,6 +160,7 @@ public class PublishItemActivity extends FragmentActivity {
 
                 ContentValues cv = new ContentValues();
                 cv.put("SellerID", UUID.randomUUID().toString());
+                cv.put("ItemID", UUID.randomUUID().toString());
                 cv.put("ItemTitle", mTitle.getText().toString());
                 //cv.put("Price", mPrice.getText().toString());
                 cv.put("Detail", mDetail.getText().toString());

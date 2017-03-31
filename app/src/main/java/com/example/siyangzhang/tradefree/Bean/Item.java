@@ -3,6 +3,10 @@ package com.example.siyangzhang.tradefree.Bean;
 import java.io.Serializable;
 import java.util.UUID;
 
+/**
+ * Created by siyangzhang on 2/10/17.
+ */
+
 public class Item implements Serializable {
 
     private UUID itemId;

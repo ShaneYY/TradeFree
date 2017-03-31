@@ -13,22 +13,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.siyangzhang.tradefree.Bean.Db;
-import com.example.siyangzhang.tradefree.Bean.Photo;
-import com.example.siyangzhang.tradefree.R;
 import com.example.siyangzhang.tradefree.Fragment.IndexFragment;
+import com.example.siyangzhang.tradefree.R;
 import com.example.siyangzhang.tradefree.Util.PictureUtils;
 
 import java.io.FileNotFoundException;
 
-/**
- * Created by siyangzhang on 3/25/17.
- */
-
-public class ItemShow extends Activity {
+public class ItemShowCateg extends Activity {
 
     private TextView itemShow;
     private ImageView imageShow;
-    private final String TAG = "ItemShow";
+    private final String TAG = "ItemShowCateg";
 
     private Db db;
     private SQLiteDatabase dbRead;
@@ -47,7 +42,7 @@ public class ItemShow extends Activity {
         itemShow = (TextView) findViewById(R.id.item_show);
         imageShow = (ImageView) findViewById(R.id.image_show);
         Intent intent = getIntent();
-        String str = intent.getStringExtra(IndexFragment.Item_Info);
+        String str = intent.getStringExtra(ViewCategActivity.Item_Info);
         String path = getFileStreamPath(str).getAbsolutePath();
         BitmapDrawable b = PictureUtils.getScaledDrawable(this, path);
 

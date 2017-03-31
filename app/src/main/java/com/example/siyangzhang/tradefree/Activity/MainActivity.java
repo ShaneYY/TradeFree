@@ -21,6 +21,9 @@ import com.example.siyangzhang.tradefree.Fragment.CategFragment;
 import com.example.siyangzhang.tradefree.Fragment.NearbyFragment;
 import com.example.siyangzhang.tradefree.Fragment.ProfileFragment;
 
+/**
+ * Created by siyangzhang on 2/10/17.
+ */
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
