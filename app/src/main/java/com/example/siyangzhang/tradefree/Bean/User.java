@@ -11,13 +11,13 @@ import com.google.android.maps.GeoPoint;
 public class User implements Serializable {
     private UUID userId;
     private String name;
-    private Boolean sex;
+    private String sex;
     private String number;
+    private GeoPoint location;
 
     /**
      *  Need to figure out how to use GeoPoint later
      */
-    //private GeoPoint location;
 
     public UUID getUserId() {
         return userId;
@@ -35,11 +35,11 @@ public class User implements Serializable {
         this.name = name;
     }
 
-    public Boolean getSex() {
+    public String getSex() {
         return sex;
     }
 
-    public void setSex(Boolean sex) {
+    public void setSex(String sex) {
         this.sex = sex;
     }
 
@@ -51,11 +51,11 @@ public class User implements Serializable {
         this.number = number;
     }
 
-    //public GeoPoint getLocation() {
-    //    return location;
-    //}
+    public GeoPoint getLocation() {
+        return location;
+    }
 
-    //public void setLocation(GeoPoint location) {
-    //    this.location = location;
-    //}
+    public void setLocation(GeoPoint location) {
+        this.location = location;
+    }
 }

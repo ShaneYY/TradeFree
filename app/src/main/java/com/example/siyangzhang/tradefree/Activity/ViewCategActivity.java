@@ -9,7 +9,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -23,12 +22,11 @@ import com.example.siyangzhang.tradefree.R;
  */
 
 public class ViewCategActivity extends ListActivity {
-    private SimpleCursorAdapter adapter;
+    private SimpleCursorAdapter adpater;
     private EditText Title;
     private Db db;
     private SQLiteDatabase dbRead, dbWrite;
-    public static final String Item_Info = "Item_Info";
-    private ListView listView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,36 +47,14 @@ public class ViewCategActivity extends ListActivity {
             count++;
         }
         System.out.println(count);
-        adapter = new SimpleCursorAdapter(this, R.layout.fragment_categ_list, c, new String[]{"ItemTitle"}, new int[]{R.id.tvName});
+        adpater = new SimpleCursorAdapter(this, R.layout.fragment_categ_list, c, new String[]{"ItemTitle"}, new int[]{R.id.tvName});
         //ListView Items = (ListView) findViewById(R.id.);
-        setListAdapter(adapter);
-        listView = (ListView) findViewById(R.id.show_list);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-                Cursor c = adapter.getCursor();
-
-                c.moveToPosition(position);
-                int itemId = c.getInt(c.getColumnIndex("_id"));
-                Intent intent = new Intent(ViewCategActivity.this, ItemShowCateg.class);
-                intent.putExtra(Item_Info, itemId);
-                startActivity(intent);
-            }
-        });
-
+        setListAdapter(adpater);
         //refreshListView();
         db.close();
 
     }
 
-    public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-        Cursor c = adapter.getCursor();
-
-        c.moveToPosition(position);
-        int itemId = c.getInt(c.getColumnIndex("_id"));
-        Intent intent = new Intent(ViewCategActivity.this, ItemShowCateg.class);
-        intent.putExtra("ID","itemId");
-        startActivity(intent);
-    }
     /*private void refreshListView() {
         // tableName, tableColumns, whereClause, whereArgs, groupBy, having, orderBy
         Cursor c = dbRead.query("ITEM", null, "Type = ?", new String[]{"TV"}, null, null, null);

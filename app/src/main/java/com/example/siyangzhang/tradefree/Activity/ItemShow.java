@@ -21,7 +21,7 @@ import com.example.siyangzhang.tradefree.Util.PictureUtils;
 import java.io.FileNotFoundException;
 
 /**
- * Created by siyangzhang on 3/25/17.
+ * Created by siyangzhang on 2/17/17.
  */
 
 public class ItemShow extends Activity {

@@ -66,6 +66,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         final List<String> permissionsList = new ArrayList<String>();
         if (!addPermission(permissionsList, Manifest.permission.ACCESS_FINE_LOCATION))
             permissionsNeeded.add("GPS");
+        if (!addPermission(permissionsList, Manifest.permission.ACCESS_NETWORK_STATE))
+            permissionsNeeded.add("Network");
         if (!addPermission(permissionsList, Manifest.permission.CAMERA))
             permissionsNeeded.add("CAMERA");
         if (!addPermission(permissionsList, Manifest.permission.READ_EXTERNAL_STORAGE))
