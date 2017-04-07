@@ -1,14 +1,20 @@
 package com.example.siyangzhang.tradefree.Activity;
 
+import android.Manifest;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -59,7 +65,7 @@ public class PublishItemActivity extends FragmentActivity {
     private int IndicatorWidth;
     private ImageButton mPhotoButton;
     private ImageView mPhotoView;
-    private List<Item> Testitem=new ArrayList<>();
+    private List<Item> Testitem = new ArrayList<>();
     private User mUser = new User();
     private Item mItem = new Item();
     private EditText mTitle;
@@ -71,10 +77,11 @@ public class PublishItemActivity extends FragmentActivity {
     private String selectedType;
     private String filename;
     private Callbacks mCallbacks;
-
-    public static final int CROP_PHOTO=1;
-    public static final int SELECT_PHOTO=2;
-    public static final int REQUEST_PHOTO=3;
+    private double latitude;
+    private double longitude;
+    public static final int CROP_PHOTO = 1;
+    public static final int SELECT_PHOTO = 2;
+    public static final int REQUEST_PHOTO = 3;
     private static final String TAG = "PublishItem";
     private static final String DIALOG_IMAGE = "image";
 
@@ -86,7 +93,7 @@ public class PublishItemActivity extends FragmentActivity {
     private SQLiteDatabase dbWrite;
 
 
-    public interface Callbacks{
+    public interface Callbacks {
         void onItemUpdated(Item item);
     }
 
@@ -104,7 +111,31 @@ public class PublishItemActivity extends FragmentActivity {
         mPhotoButton = (ImageButton) findViewById(R.id.add_pictures);
         mType = (Spinner) findViewById(R.id.type_spinner);
         publish = (Button) findViewById(R.id.publish);
-        simpleDateFormat=new SimpleDateFormat("yyyy-MM");
+        simpleDateFormat = new SimpleDateFormat("yyyy-MM");
+
+
+        LocationManager locManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+
+        locManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 35000, 10, locationListener);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+            requestPermissions(new String[]{Manifest.permission.ACCESS_NETWORK_STATE}, 1);
+
+            return;
+        }
+        Location location = locManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+        if(location != null){
+            latitude = location.getLatitude(); //经度
+            longitude = location.getLongitude(); //纬度
+        }
+
         initEvents();
     }
 
@@ -158,14 +189,16 @@ public class PublishItemActivity extends FragmentActivity {
                 mPrice = (EditText) findViewById(R.id.price);
                 mDetail = (EditText) findViewById(R.id.detail);
 
+
                 ContentValues cv = new ContentValues();
                 cv.put("SellerID", UUID.randomUUID().toString());
-                cv.put("ItemID", UUID.randomUUID().toString());
+                //cv.put("ItemID", UUID.randomUUID().toString());
                 cv.put("ItemTitle", mTitle.getText().toString());
                 //cv.put("Price", mPrice.getText().toString());
                 cv.put("Detail", mDetail.getText().toString());
-                cv.put("Type", selectedType.toString());
-
+                cv.put("Type", selectedType);
+                cv.put("Longitude", longitude);
+                cv.put("Latitude", latitude);
                 dbWrite.insert("ITEM", null, cv);
 
 
@@ -287,6 +320,36 @@ public class PublishItemActivity extends FragmentActivity {
         }
         mPhotoView.setImageDrawable(b);
     }
+
+    LocationListener locationListener = new LocationListener() {
+        // Provider的状态在可用、暂时不可用和无服务三个状态直接切换时触发此函数
+        @Override
+        public void onStatusChanged(String provider, int status, Bundle extras) {
+
+        }
+
+        // Provider被enable时触发此函数，比如GPS被打开
+        @Override
+        public void onProviderEnabled(String provider) {
+
+        }
+
+        // Provider被disable时触发此函数，比如GPS被关闭
+        @Override
+        public void onProviderDisabled(String provider) {
+
+        }
+
+        //当坐标改变时触发此函数，如果Provider传进相同的坐标，它就不会被触发
+        @Override
+        public void onLocationChanged(Location location) {
+            if (location != null) {
+                Log.e("Map", "Location changed : Lat: "
+                        + location.getLatitude() + " Lng: "
+                        + location.getLongitude());
+            }
+        }
+    };
 }
 
 

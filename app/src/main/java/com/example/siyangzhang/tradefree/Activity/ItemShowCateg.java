@@ -42,12 +42,13 @@ public class ItemShowCateg extends Activity {
         itemShow = (TextView) findViewById(R.id.item_show);
         imageShow = (ImageView) findViewById(R.id.image_show);
         Intent intent = getIntent();
+        /*
         String str = intent.getStringExtra(ViewCategActivity.Item_Info);
         String path = getFileStreamPath(str).getAbsolutePath();
         BitmapDrawable b = PictureUtils.getScaledDrawable(this, path);
-
         imageShow.setImageDrawable(b);
         imageShow.setRotation(90);
+        */
     }
 
     @Override

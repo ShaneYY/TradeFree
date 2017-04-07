@@ -15,7 +15,11 @@ public class Db extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE ITEM(_id INTEGER PRIMARY KEY AUTOINCREMENT, SellerID INTEGER, ItemTitle varchar(20), Price REAL, Detail TEXT, Phone TEXT, Type varchar(20));");
+        db.execSQL("CREATE TABLE ITEM(_id INTEGER PRIMARY KEY AUTOINCREMENT, SellerID INTEGER, ItemTitle varchar(20), " +
+                "Price REAL, Detail TEXT, Phone TEXT, Type varchar(20), Longitude DOUBLE, Latitude DOUBLE);");
+        //db.execSQL("CREATE TABLE USER(_id INTEGER PRIMARY KEY AUTOINCREMENT, UserID INTEGER, UserName varchar(20), Sex TEXT, Phone TEXT, Longitude INTEGER, Latitude INTEGER);");
+
+        /*
         db.execSQL("INSERT INTO ITEM VALUES(10, 1,'myBigPC', 7000.0, 'it is good', '412-419-882','PC');");
         db.execSQL("INSERT INTO ITEM VALUES(11, 1,'mySmallPC', 3000.0, 'it is good', '412-419-883','PC');");
         db.execSQL("INSERT INTO ITEM VALUES(12, 1,'myBigTV', 1000.0, 'it is good', '412-419-880','TV');");
@@ -28,6 +32,7 @@ public class Db extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO ITEM VALUES(19, 1,'mySmallCAMERA', 700.0, 'it is good', '412-419-887','CM');");
         db.execSQL("INSERT INTO ITEM VALUES(20, 1,'myBigFDRIVE', 1000.0, 'it is good', '412-419-886','FD');");
         db.execSQL("INSERT INTO ITEM VALUES(21, 1,'mySmallFDRIVE', 700.0, 'it is good', '412-419-887','FD');");
+        */
     }
 
 
