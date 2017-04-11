@@ -73,21 +73,15 @@ public class ItemShow extends Activity {
         super.onPause();
     }
 
-    private Html.ImageGetter imageGetter = new Html.ImageGetter() {
-        @Override
-        public Drawable getDrawable(String source) {
-            Drawable d = null;
-            try {
-                d = Drawable.createFromStream(getApplicationContext().getContentResolver()
-                        .openInputStream(Uri.parse(source)), null);
-                d.setBounds(0, 0, d.getIntrinsicWidth(), d.getIntrinsicHeight());
-                Log.d("widthAndheight",d.getIntrinsicWidth()+"----"+d.getIntrinsicHeight()+"");
-                return d;
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        // Read values from the "savedInstanceState"-object and put them in your textview
+    }
 
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
-    };
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        // Save the values you need from your textview into "outState"-object
+        super.onSaveInstanceState(outState);
+    }
 }

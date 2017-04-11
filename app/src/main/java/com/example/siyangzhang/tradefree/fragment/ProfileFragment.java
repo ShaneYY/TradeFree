@@ -1,6 +1,7 @@
 package com.example.siyangzhang.tradefree.Fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -8,7 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 
+import com.example.siyangzhang.tradefree.Activity.ViewSellHistoryActivity;
 import com.example.siyangzhang.tradefree.R;
 
 /**
@@ -19,9 +22,10 @@ import com.example.siyangzhang.tradefree.R;
  * Use the {@link ProfileFragment#newInstance} factory method to
  * create an instance of this Fragment.
  */
-public class ProfileFragment extends BaseFragment {
+public class ProfileFragment extends BaseFragment implements View.OnClickListener{
 
     private View mView;
+    private ImageView btnSeller;
 
     Button mBtn;
     // TODO: Rename parameter arguments, choose names that match
@@ -61,6 +65,7 @@ public class ProfileFragment extends BaseFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -72,8 +77,24 @@ public class ProfileFragment extends BaseFragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this Fragment
         mView =  inflater.inflate(R.layout.fragment_profile, container, false);
+        btnSeller = (ImageView) mView.findViewById(R.id.btnSeller);
+        btnSeller.setOnClickListener(this);
+
         return mView;
     }
+
+    @Override
+    public void onClick(View view) {
+        Intent intent = new Intent();
+        switch (view.getId()) {
+            case R.id.btnSeller:
+                intent.setClass(getActivity(), ViewSellHistoryActivity.class);
+                intent.putExtra("SellerID", "1");
+                startActivity(intent);
+                break;
+        }
+    }
+
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
