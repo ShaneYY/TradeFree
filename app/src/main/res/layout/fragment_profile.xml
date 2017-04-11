@@ -92,7 +92,7 @@
             android:text="Sell History" />
 
         <ImageView
-
+            android:id="@+id/btnSeller"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -151,15 +151,6 @@
             android:src="@drawable/arrow_icon" />
 
     </RelativeLayout>
-
-    <TextView
-        android:text="ON PROGRESS"
-        android:textSize="50dp"
-        android:textColor="@android:color/holo_red_light"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView"
-        android:layout_weight="0.74" />
 
 
 </LinearLayout>

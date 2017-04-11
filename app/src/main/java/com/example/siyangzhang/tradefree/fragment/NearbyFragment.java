@@ -3,6 +3,9 @@ package com.example.siyangzhang.tradefree.Fragment;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.graphics.drawable.BitmapDrawable;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -14,13 +17,18 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.example.siyangzhang.tradefree.Bean.Db;
 import com.example.siyangzhang.tradefree.R;
+import com.example.siyangzhang.tradefree.Util.PictureUtils;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.maps.MapView;
 
@@ -85,16 +93,6 @@ public class NearbyFragment extends Fragment implements OnMapReadyCallback {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_nearby, container, false);
-//        FragmentManager fm = getFragmentManager();
-//        FragmentManager fm = getActivity().getSupportFragmentManager();
-//        final SupportMapFragment mapFragment = (SupportMapFragment) fm.findFragmentById(R.id.mapView);
-//        SupportMapFragment mapFragment= (SupportMapFragment) fm.findFragmentById(map);
-//        mMapView = (MapView) rootView.findViewById(R.id.map);
-//        mMapView.onCreate(savedInstanceState);
-//        SupportMapFragment mapFragment = (SupportMapFragment) getFragmentManager().findFragmentById(map);
-//        mapFragment.getMapAsync(this);
-//        SupportMapFragment mapFragment = (SupportMapFragment) getFragmentManager().findFragmentById(R.id.map);
-//        mapFragment.getMapAsync(this);
         FragmentManager fm = getChildFragmentManager();
         mapFragment = (SupportMapFragment) fm.findFragmentById(R.id.map);
         if(mapFragment == null){
@@ -108,21 +106,11 @@ public class NearbyFragment extends Fragment implements OnMapReadyCallback {
 
     private SupportMapFragment mapFragment;
 
-//    @Override
-//    public void onActivityCreated(Bundle savedInstanceState){
-//        super.onActivityCreated(savedInstanceState);
-//        FragmentManager fm = getChildFragmentManager();
-//        mapFragment = (SupportMapFragment) fm.findFragmentById(R.id.map);
-//        if(mapFragment == null){
-//            mapFragment = SupportMapFragment.newInstance();
-//            fm.beginTransaction().replace(R.id.map, mapFragment).commit();
-//        } else {
-//            mapFragment.getMapAsync(this);
-//        }
-//    }
-
     private double latitude;
     private double longitude;
+
+    private Db db;
+    private SQLiteDatabase dbRead, dbWrite;
     @Override
     public void onMapReady(GoogleMap googleMap) {
         requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
@@ -132,15 +120,6 @@ public class NearbyFragment extends Fragment implements OnMapReadyCallback {
         } else {
             // Show rationale and request permission.
         }
-
-////        mMap = googleMap;
-////        setUpMap();// do your map stuff here
-//        this.googleMap = googleMap;
-//        mMap=googleMap;
-//        LatLng sydney = new LatLng(-34, 151);
-//        googleMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-////        map.addMarker(new MarkerOptions().position(adam).title("Marker in adam"));
-//        googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
 
         LocationManager locManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
 
@@ -154,12 +133,97 @@ public class NearbyFragment extends Fragment implements OnMapReadyCallback {
         LatLng myLocation = new LatLng(latitude, longitude);
         LatLng dl = new LatLng(40.002133,-83.015911);
         LatLng cl = new LatLng(40.002439,-83.015003);
+
+        db = new Db(getActivity());
+        dbRead = db.getReadableDatabase();
+        dbWrite = db.getWritableDatabase();
+
+//        Cursor c = dbRead.rawQuery("SELECT * FROM ITEM WHERE (Latitude-? <= ? AND Latitude-?>= ? AND Longitude-?<=? Longitude-?>=?",
+//                new String[]{String.valueOf(latitude),"0.001",String.valueOf(latitude),"-0.001",String.valueOf(longitude),"0.001",String.valueOf(longitude),"-0.001"});
+
+        double LongHigh=longitude+0.0001;
+        double LongLow=longitude-0.0001;
+        double LatiHigh=latitude+0.0001;
+        double LatiLow=latitude-0.0001;
+
+        Cursor c=dbRead.query("ITEM",
+                null,
+                "Longitude<? AND Longitude>? AND Latitude<? AND Latitude>?",
+                new String[] {String.valueOf(LongHigh),String.valueOf(LongLow),String.valueOf(LatiHigh),String.valueOf(LatiLow)},
+                null,null,null
+        );
+        googleMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+
+            // Use default InfoWindow frame
+            @Override
+            public View getInfoWindow(Marker arg0) {
+                return null;
+            }
+
+            // Defines the contents of the InfoWindow
+            @Override
+            public View getInfoContents(Marker arg0) {
+
+                View v = getActivity().getLayoutInflater().inflate(R.layout.info_window_layout, null);
+
+                LatLng latLng = arg0.getPosition();
+                String itemT=arg0.getTitle();
+                String Det=arg0.getSnippet();
+                TextView tvLat = (TextView) v.findViewById(R.id.tv_lat);
+                TextView tvLng = (TextView) v.findViewById(R.id.tv_lng);
+
+                ImageView im=(ImageView) v.findViewById(R.id.im);
+
+                // Setting the latitude
+                tvLat.setText("ITEM:" + itemT);
+                //tvLng.setText("DETAIL:"+ Det);
+
+                String path = getActivity().getFileStreamPath(Det).getAbsolutePath();
+                BitmapDrawable b = PictureUtils.getScaledDrawable(getActivity(), path);
+                im.setImageDrawable(b);
+                im.setRotation(90);
+                return v;
+            }
+        });
+
+        googleMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener()
+        {
+            @Override
+            public void onInfoWindowClick(Marker arg0) {
+                // call an activity(xml file)
+            }
+
+        });
+
+        while (c.moveToNext()){
+            int latiColIndex=c.getColumnIndex("Latitude");
+            int LongColIndex=c.getColumnIndex("Longitude");
+            double lati=c.getDouble(latiColIndex);
+            double longi=c.getDouble(LongColIndex);
+            Log.d(TAG, "onMapReady: "+lati);
+            Log.d(TAG,"onMapReady: "+longi);
+
+            int itemTitleIndex=c.getColumnIndex("ItemTitle");
+            String itemTitle=c.getString(itemTitleIndex);
+            int detialIndex=c.getColumnIndex("Detail");
+            String Detail=c.getString(detialIndex);
+            int slrIDIndex=c.getColumnIndex("SellerID");
+            String slrID=c.getString(slrIDIndex);
+            int photoIndex=c.getColumnIndex("Photo");
+            String Photo=c.getString(photoIndex);
+
+            LatLng cLocation=new LatLng(lati,longi);
+            googleMap.addMarker(new MarkerOptions().position(cLocation).title(itemTitle).snippet(Photo));
+        }
+
+
+
         //LatLng sydney = new LatLng(-34, 151);
-        googleMap.addMarker(new MarkerOptions().position(myLocation).title("Me"));
-        googleMap.addMarker(new MarkerOptions().position(dl).title("Marker in Dreese Lab"));
-        googleMap.addMarker(new MarkerOptions().position(cl).title("Marker in Caldwell"));
+        //googleMap.addMarker(new MarkerOptions().position(myLocation).title("Me"));
+//        googleMap.addMarker(new MarkerOptions().position(dl).title("Marker in Dreese Lab"));
+//        googleMap.addMarker(new MarkerOptions().position(cl).title("Marker in Caldwell"));
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(myLocation));
-        googleMap.animateCamera(CameraUpdateFactory.zoomTo(14));
+        googleMap.animateCamera(CameraUpdateFactory.zoomTo(25));
     }
     LocationListener locationListener = new LocationListener() {
         // Provider的状态在可用、暂时不可用和无服务三个状态直接切换时触发此函数

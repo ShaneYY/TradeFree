@@ -1,8 +1,6 @@
 package com.example.siyangzhang.tradefree.Activity;
 
-import android.app.Activity;
 import android.app.ListActivity;
-import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -11,38 +9,34 @@ import android.support.v4.widget.SimpleCursorAdapter;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.Toast;
 
-import com.example.siyangzhang.tradefree.Adapter.ItemListAdapter;
 import com.example.siyangzhang.tradefree.Bean.Db;
 import com.example.siyangzhang.tradefree.R;
 
 /**
- * Created by zijianhu on 3/26/17.
+ * Created by zijianhu on 4/9/17.
  */
 
-public class ViewCategActivity extends ListActivity {
+public class ViewSellHistoryActivity extends ListActivity {
     private SimpleCursorAdapter adpater;
     private EditText Title;
     private Db db;
     private SQLiteDatabase dbRead, dbWrite;
     public static final String ID = "id";
+
     private AdapterView.OnItemClickListener itemclicklistener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             Cursor c = adpater.getCursor();
             c.moveToPosition(position);
-            Log.d("onclick", "haaaaaahahahahahahhahahahaha");
+            //Log.d("onclick", "haaaaaahahahahahahhahahahaha");
             int itemId = c.getInt(c.getColumnIndex("_id"));
-            Log.d("onclick", "itemId = " + itemId);
+            //Log.d("onclick", "itemId = " + itemId);
             Intent intent = new Intent();
-            intent.setClass(ViewCategActivity.this, ItemShowCateg.class);
+            intent.setClass(ViewSellHistoryActivity.this, ItemShowCateg.class);
             intent.putExtra(ID, itemId);
             startActivity(intent);
-
         }
     };
 
@@ -52,15 +46,17 @@ public class ViewCategActivity extends ListActivity {
         setContentView(R.layout.fragment_showlist);
 
         Intent intent = getIntent();
-        String type = intent.getStringExtra("type");
+        String SellerID = intent.getStringExtra("SellerID");
         //System.out.println(type);
+
 
         db = new Db(this);
         dbRead = db.getReadableDatabase();
         dbWrite = db.getWritableDatabase();
         // tableName, tableColumns, whereClause, whereArgs, groupBy, having, orderBy
         //Cursor c = dbRead.query("ITEM", null, "Type = ?", new String[]{type}, null, null, null);
-        Cursor c = dbRead.query("ITEM", null, "Type = ?", new String[]{type}, null, null, null);
+        Cursor c = dbRead.query("ITEM", null, "SellerID = ?", new String[]{String.valueOf(1)}, null, null, null);
+        //Cursor c = dbRead.query("ITEM", null, null, null, null, null, null);
         int count = 0;
         while(c.moveToNext()) {
             count++;
@@ -73,9 +69,6 @@ public class ViewCategActivity extends ListActivity {
 
         //refreshListView();
         db.close();
-
-
-
     }
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {

@@ -191,12 +191,12 @@ public class PublishItemActivity extends FragmentActivity {
 
 
                 ContentValues cv = new ContentValues();
-                cv.put("SellerID", UUID.randomUUID().toString());
-                //cv.put("ItemID", UUID.randomUUID().toString());
+                cv.put("SellerID", 1);
                 cv.put("ItemTitle", mTitle.getText().toString());
-                //cv.put("Price", mPrice.getText().toString());
+                cv.put("Price", mPrice.getText().toString());
                 cv.put("Detail", mDetail.getText().toString());
                 cv.put("Type", selectedType);
+                cv.put("Photo", filename);
                 cv.put("Longitude", longitude);
                 cv.put("Latitude", latitude);
                 dbWrite.insert("ITEM", null, cv);
@@ -350,6 +350,18 @@ public class PublishItemActivity extends FragmentActivity {
             }
         }
     };
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        // Read values from the "savedInstanceState"-object and put them in your textview
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        // Save the values you need from your textview into "outState"-object
+        super.onSaveInstanceState(outState);
+    }
 }
 
 

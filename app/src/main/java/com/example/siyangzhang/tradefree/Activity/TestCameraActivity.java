@@ -24,5 +24,15 @@ public class TestCameraActivity extends SingleFragmentActivity {
 	protected Fragment createFragment() {
 		return new TestCameraFragment();
 	}
-	
+	@Override
+	protected void onRestoreInstanceState(Bundle savedInstanceState) {
+		super.onRestoreInstanceState(savedInstanceState);
+		// Read values from the "savedInstanceState"-object and put them in your textview
+	}
+
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		// Save the values you need from your textview into "outState"-object
+		super.onSaveInstanceState(outState);
+	}
 }

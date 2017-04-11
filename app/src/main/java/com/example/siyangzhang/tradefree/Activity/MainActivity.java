@@ -212,16 +212,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    public void onIndexFragmentInteraction(Uri uri) {
-        // Do stuff
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        // Read values from the "savedInstanceState"-object and put them in your textview
     }
-    public void onCategFragmentInteraction(Uri uri) {
-        // Do stuff
-    }
-    public void onNearbyFragmentInteraction(Uri uri) {
-        // Do stuff
-    }
-    public void onProfileFragmentInteraction(Uri uri) {
-        // Do stuff
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        // Save the values you need from your textview into "outState"-object
+        super.onSaveInstanceState(outState);
     }
 }
